@@ -82,5 +82,3 @@ if __name__ == "__main__":
 			]
 
 	g.dijkstra(0)
-
-# This code is contributed by Divyanshu Mehta and Updated by Pranav Singh Sambyal
