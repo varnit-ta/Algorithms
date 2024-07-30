@@ -1,6 +1,6 @@
 #include <iostream>
 
-class Node {
+struct Node {
     /**
      * A Node in a singly linked list.
      * 
@@ -8,20 +8,16 @@ class Node {
      *     data (int): The data stored in the node.
      *     next (Node*): The pointer to the next node in the list.
      */
-public:
     int data;
     Node* next;
 
     // Constructor to initialize a node
-    Node(int data) {
-        this->data = data;
-        this->next = nullptr;
-    }
+    Node(int data) : data(data), next(nullptr) {}
 };
 
-class SinglyLinkedList {
+struct SinglyLinkedList {
     /**
-     * A Singly Linked List class with basic list operations.
+     * A Singly Linked List struct with basic list operations.
      * 
      * Attributes:
      *     head (Node*): The head node of the list.
@@ -33,14 +29,10 @@ class SinglyLinkedList {
      *     search(int data): Searches for a node containing the given data.
      *     display(): Displays the list as a sequence of data elements.
      */
-private:
     Node* head;
 
-public:
     // Constructor to initialize an empty singly linked list
-    SinglyLinkedList() {
-        head = nullptr;
-    }
+    SinglyLinkedList() : head(nullptr) {}
 
     // Adds a node with the given data to the end of the list
     void append(int data) {
