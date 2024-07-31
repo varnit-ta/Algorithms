@@ -10,21 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec84ca3a-8830-49f2-bd9e-24b2840e939f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.vscode/c_cpp_properties.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/4.Linked List/Double LL/cpp_code.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/4.Linked List/Double LL/cpp_code.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4.Linked List/Singly LL/cpp_code.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/4.Linked List/Singly LL/cpp_code.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/5.Trees/Binary Search Tree/cpp_code.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/5.Trees/Binary Search Tree/cpp_code.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/5.Trees/Binary Search Tree/python_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/5.Trees/Binary Search Tree/python_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/5.Trees/Binary Tress/cpp_code.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/5.Trees/Binary Tress/cpp_code.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/5.Trees/Binary Tress/python_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/5.Trees/Binary Tress/python_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practice/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/Practice/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practice/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/Practice/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practice/cmake-build-debug/CMakeFiles/Practice.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/Practice/cmake-build-debug/CMakeFiles/Practice.dir/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practice/cmake-build-debug/Practice.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Practice/cmake-build-debug/Practice.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practice/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/Practice/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practice/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Practice/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +80,7 @@
       <workItem from="1722408370328" duration="146000" />
       <workItem from="1722408537084" duration="32000" />
       <workItem from="1722408581476" duration="538000" />
-      <workItem from="1722409136363" duration="1621000" />
+      <workItem from="1722409136363" duration="1671000" />
     </task>
     <servers />
   </component>

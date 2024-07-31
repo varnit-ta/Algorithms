@@ -54,7 +54,7 @@ void append(node*& start, int pos, int val){
     }
 }
 
-//Fucntion to delete a node
+//Function to delete a node
 void remove(node*& start, int data) {
     node *temp = new node();
     node *ptr = start;
