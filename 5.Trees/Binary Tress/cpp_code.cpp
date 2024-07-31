@@ -1,132 +1,154 @@
 #include <iostream>
-#include <vector>
+#include <queue>
 
-class BTreeNode {
-    /**
-     * A node in a B-tree.
-     * 
-     * Attributes:
-     *     t (int): Minimum degree of the B-tree.
-     *     isLeaf (bool): A flag indicating if the node is a leaf.
-     *     keys (std::vector<int>): A list of keys in the node.
-     *     children (std::vector<BTreeNode*>): A list of children nodes.
-     */
-public:
-    int t;
-    bool isLeaf;
-    std::vector<int> keys;
-    std::vector<BTreeNode*> children;
+using namespace std;
 
-    BTreeNode(int t, bool isLeaf) {
-        this->t = t;
-        this->isLeaf = isLeaf;
-    }
+// Node definition
+struct Node {
+    int key;
+    Node* left;
+    Node* right;
 
-    void traverse(int level = 0) {
-        /** Traverses and prints the B-tree. */
-        std::cout << "Level " << level << " : ";
-        for (int key : keys) {
-            std::cout << key << " ";
-        }
-        std::cout << std::endl;
-        if (!isLeaf) {
-            for (BTreeNode* child : children) {
-                child->traverse(level + 1);
-            }
-        }
-    }
+    Node(int k) : key(k), left(nullptr), right(nullptr) {}
 };
 
-class BTree {
-    /**
-     * A B-tree class with basic B-tree operations.
-     * 
-     * Attributes:
-     *     root (BTreeNode*): The root node of the B-tree.
-     * 
-     * Methods:
-     *     insert(int key): Inserts a key into the B-tree.
-     *     traverse(): Traverses and prints the B-tree.
-     */
-private:
-    BTreeNode* root;
-    int t;
+// Function prototypes
+Node* insert(Node* root, int key);
+Node* search(Node* root, int key);
+void levelOrder(Node* root);
+void inorder(Node* root);
+void preorder(Node* root);
+void postorder(Node* root);
 
-    void splitChild(BTreeNode* parent, int i);
-    void insertNonFull(BTreeNode* node, int key);
-
-public:
-    BTree(int t) {
-        this->t = t;
-        root = new BTreeNode(t, true);
+// Function implementations
+Node* insert(Node* root, int key) {
+    if (root == nullptr) {
+        return new Node(key);
     }
 
-    void insert(int key);
-    void traverse() {
-        root->traverse();
-    }
-};
+    queue<Node*> q;
+    q.push(root);
 
-void BTree::splitChild(BTreeNode* parent, int i) {
-    /** Splits the child of a node. */
-    BTreeNode* y = parent->children[i];
-    BTreeNode* z = new BTreeNode(y->t, y->isLeaf);
-    parent->children.insert(parent->children.begin() + i + 1, z);
-    parent->keys.insert(parent->keys.begin() + i, y->keys[y->t - 1]);
-    z->keys.assign(y->keys.begin() + y->t, y->keys.end());
-    y->keys.resize(y->t - 1);
-    if (!y->isLeaf) {
-        z->children.assign(y->children.begin() + y->t, y->children.end());
-        y->children.resize(y->t);
+    while (!q.empty()) {
+        Node* temp = q.front();
+        q.pop();
+
+        if (temp->left == nullptr) {
+            temp->left = new Node(key);
+            return root;
+        } else {
+            q.push(temp->left);
+        }
+
+        if (temp->right == nullptr) {
+            temp->right = new Node(key);
+            return root;
+        } else {
+            q.push(temp->right);
+        }
+    }
+    return root;
+}
+
+Node* search(Node* root, int key) {
+    if (root == nullptr) return nullptr;
+
+    queue<Node*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Node* temp = q.front();
+        q.pop();
+
+        if (temp->key == key) {
+            return temp;
+        }
+
+        if (temp->left) {
+            q.push(temp->left);
+        }
+
+        if (temp->right) {
+            q.push(temp->right);
+        }
+    }
+    return nullptr;
+}
+
+void levelOrder(Node* root) {
+    if (root == nullptr) return;
+
+    queue<Node*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Node* temp = q.front();
+        q.pop();
+        cout << temp->key << " ";
+
+        if (temp->left) {
+            q.push(temp->left);
+        }
+
+        if (temp->right) {
+            q.push(temp->right);
+        }
     }
 }
 
-void BTree::insertNonFull(BTreeNode* node, int key) {
-    /** Inserts a key into a node that is not full. */
-    int i = node->keys.size() - 1;
-    if (node->isLeaf) {
-        node->keys.push_back(0);
-        while (i >= 0 && key < node->keys[i]) {
-            node->keys[i + 1] = node->keys[i];
-            i--;
-        }
-        node->keys[i + 1] = key;
-    } else {
-        while (i >= 0 && key < node->keys[i]) {
-            i--;
-        }
-        i++;
-        if (node->children[i]->keys.size() == (2 * t - 1)) {
-            splitChild(node, i);
-            if (key > node->keys[i]) {
-                i++;
-            }
-        }
-        insertNonFull(node->children[i], key);
+void inorder(Node* root) {
+    if (root) {
+        inorder(root->left);
+        cout << root->key << " ";
+        inorder(root->right);
     }
 }
 
-void BTree::insert(int key) {
-    /** Inserts a key into the B-tree. */
-    BTreeNode* r = root;
-    if (r->keys.size() == (2 * t - 1)) {
-        BTreeNode* s = new BTreeNode(t, false);
-        root = s;
-        s->children.push_back(r);
-        splitChild(s, 0);
-        insertNonFull(s, key);
-    } else {
-        insertNonFull(r, key);
+void preorder(Node* root) {
+    if (root) {
+        cout << root->key << " ";
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+
+void postorder(Node* root) {
+    if (root) {
+        postorder(root->left);
+        postorder(root->right);
+        cout << root->key << " ";
     }
 }
 
 // Example usage
 int main() {
-    BTree btree(2);  // Create a B-tree with minimum degree 2
-    std::vector<int> keys = {10, 20, 5, 6, 15, 30, 25, 40, 50, 35};
-    for (int key : keys) {
-        btree.insert(key);
-    }
-    btree.traverse();
+    Node* root = nullptr;
+    root = insert(root, 1);
+    root = insert(root, 2);
+    root = insert(root, 3);
+    root = insert(root, 4);
+    root = insert(root, 5);
+    root = insert(root, 6);
+    root = insert(root, 7);
+
+    cout << "Level order traversal:" << endl;
+    levelOrder(root);
+    cout << endl;
+
+    cout << "Inorder traversal:" << endl;
+    inorder(root);
+    cout << endl;
+
+    cout << "Preorder traversal:" << endl;
+    preorder(root);
+    cout << endl;
+
+    cout << "Postorder traversal:" << endl;
+    postorder(root);
+    cout << endl;
+
+    cout << "Search for 4: " << (search(root, 4) ? "Found" : "Not Found") << endl;
+    cout << "Search for 10: " << (search(root, 10) ? "Found" : "Not Found") << endl;
+
     return 0;
 }

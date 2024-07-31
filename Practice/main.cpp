@@ -7,7 +7,7 @@ struct node{
     node *next;
 };
 
-void display(node *ptr){
+void display(node* ptr){
     node *p = ptr;
 
     while (p != nullptr){
@@ -55,17 +55,32 @@ void append(node*& ptr, int pos, int data) {
 }
 
 void remove(node*& ptr, int data){
-    node* p = new node();
-    p = ptr;
-    
+    if (ptr->val == data){
+        node *temp = ptr;
+        ptr = ptr->next;
+        delete temp;
+        return;
+    }
+
+    node *p = ptr;
+    while (p->next && p->next->val != data){
+        p = p->next;
+    }
+    if (p->next){
+        node *temp = p->next;
+        p->next = p->next->next;
+        delete temp;
+    }
 }
 
-int main(){
+int main() {
     node *start = nullptr;
 
     append(start, 0, 1);
     append(start, -1, 4);
     append(start, -1, 6);
     append(start, 2, 9);
+    display(start);
+    remove(start, 4);
     display(start);
 }

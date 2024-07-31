@@ -1,153 +1,104 @@
 #include <iostream>
 
-class Node {
-    /**
-     * A Node in a doubly linked list.
-     * 
-     * Attributes:
-     *     data (int): The data stored in the node.
-     *     next (Node*): The pointer to the next node in the list.
-     *     prev (Node*): The pointer to the previous node in the list.
-     */
-public:
-    int data;
-    Node* next;
-    Node* prev;
+using namespace std;
 
-    // Constructor to initialize a node
-    Node(int data) {
-        this->data = data;
-        this->next = nullptr;
-        this->prev = nullptr;
-    }
+struct node{
+    node *next;
+    int val;
+    node *prev;
 };
 
-class DoublyLinkedList {
-    /**
-     * A Doubly Linked List class with basic list operations.
-     * 
-     * Attributes:
-     *     head (Node*): The head node of the list.
-     * 
-     * Methods:
-     *     append(int data): Adds a node with the given data to the end of the list.
-     *     prepend(int data): Adds a node with the given data to the beginning of the list.
-     *     deleteNode(int data): Deletes the first node containing the given data.
-     *     search(int data): Searches for a node containing the given data.
-     *     display(): Displays the list as a sequence of data elements.
-     *     displayReverse(): Displays the list from the end to the beginning.
-     */
-private:
-    Node* head;
+//Function to add a new node
+void append(node*& start, int pos, int val){
+    node *temp = new node();
+    temp->val = val;
 
-public:
-    // Constructor to initialize an empty doubly linked list
-    DoublyLinkedList() {
-        head = nullptr;
-    }
+    node *ptr = start;
 
-    // Adds a node with the given data to the end of the list
-    void append(int data) {
-        Node* newNode = new Node(data);
-        if (!head) {
-            head = newNode;
+    if (pos == 0){
+        if (!start){
+            temp->prev = nullptr;
+            temp->next = nullptr;
+            start = temp;
             return;
         }
-        Node* lastNode = head;
-        while (lastNode->next) {
-            lastNode = lastNode->next;
+        temp->prev = nullptr;
+        temp->next = start;
+        start->prev = temp;
+        return;
+    }else if (pos == -1){
+
+        while (ptr->next){
+            ptr = ptr->next;
         }
-        lastNode->next = newNode;
-        newNode->prev = lastNode;
+
+        temp->prev = ptr;
+        temp->next = nullptr;
+        ptr->next = temp;
+        return;
+    }else {
+        for (int i = 0; i < pos-1 && ptr != nullptr; i++){
+            ptr = ptr->next;
+        }
+
+        if (!ptr){
+            cout << "Position out of bound" << endl;
+            return;
+        }
+
+        temp->next = ptr->next;
+        temp->prev = ptr;
+        ptr->next->prev = temp;
+        ptr->next = temp;
+        return;
+    }
+}
+
+//Fucntion to delete a node
+void remove(node*& start, int data) {
+    node *temp = new node();
+    node *ptr = start;
+
+    if (start->val == data) {
+        temp = start;
+        start = start->next;
+        start->prev = nullptr;
+        delete temp;
+        return;
     }
 
-    // Adds a node with the given data to the beginning of the list
-    void prepend(int data) {
-        Node* newNode = new Node(data);
-        if (head) {
-            head->prev = newNode;
-        }
-        newNode->next = head;
-        head = newNode;
+    while (ptr->val != data && ptr->next != nullptr) {
+        ptr = ptr->next;
     }
 
-    // Deletes the first node containing the given data
-    void deleteNode(int data) {
-        Node* currentNode = head;
-        while (currentNode) {
-            if (currentNode->data == data) {
-                if (currentNode->prev) {
-                    currentNode->prev->next = currentNode->next;
-                }
-                if (currentNode->next) {
-                    currentNode->next->prev = currentNode->prev;
-                }
-                if (currentNode == head) {
-                    head = currentNode->next;
-                }
-                delete currentNode;
-                return;
-            }
-            currentNode = currentNode->next;
-        }
+    temp = ptr;
+    ptr->prev->next = ptr->next;
+    if (ptr->next != nullptr) {
+        ptr->next->prev = ptr->prev;
     }
+    delete temp;
+}
 
-    // Searches for a node containing the given data
-    Node* search(int data) {
-        Node* currentNode = head;
-        while (currentNode) {
-            if (currentNode->data == data) {
-                return currentNode;
-            }
-            currentNode = currentNode->next;
-        }
-        return nullptr;
+void display(node *start){
+    node *ptr = start;
+
+    while (ptr){
+        cout << ptr->val << " -> ";
+        ptr = ptr->next;
     }
+    cout << "NULL" << endl;
+}
 
-    // Displays the list as a sequence of data elements
-    void display() {
-        Node* currentNode = head;
-        while (currentNode) {
-            std::cout << currentNode->data << " <-> ";
-            currentNode = currentNode->next;
-        }
-        std::cout << "NULL" << std::endl;
-    }
+int main(){
+    node *start = nullptr;
 
-    // Displays the list from the end to the beginning
-    void displayReverse() {
-        Node* currentNode = head;
-        Node* lastNode = nullptr;
-        while (currentNode) {
-            lastNode = currentNode;
-            currentNode = currentNode->next;
-        }
-        while (lastNode) {
-            std::cout << lastNode->data << " <-> ";
-            lastNode = lastNode->prev;
-        }
-        std::cout << "NULL" << std::endl;
-    }
-};
+    append(start, 0, 9);
+    append(start, -1, 1);
+    append(start, 1, 4);
 
-// Example usage
-int main() {
-    DoublyLinkedList dll;
-    dll.append(1);
-    dll.append(2);
-    dll.append(3);
-    dll.display();
-    dll.prepend(0);
-    dll.display();
-    dll.deleteNode(2);
-    dll.display();
-    dll.displayReverse();
-    Node* node = dll.search(3);
-    if (node) {
-        std::cout << "Node with data " << node->data << " found." << std::endl;
-    } else {
-        std::cout << "Node not found." << std::endl;
-    }
+    display(start);
 
-    return 0;
+    remove(start, 1);
+
+    display(start);
 }

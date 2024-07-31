@@ -1,89 +1,99 @@
-class BTreeNode:
-    """
-    A node in a B-tree.
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
 
-    Attributes:
-        keys (list): A list of keys in the node.
-        children (list): A list of children nodes.
-        is_leaf (bool): A flag indicating if the node is a leaf.
-    """
-    def __init__(self, t, is_leaf=False):
-        self.t = t  # Minimum degree
-        self.is_leaf = is_leaf
-        self.keys = []
-        self.children = []
-
-class BTree:
-    """
-    A B-tree class with basic B-tree operations.
-
-    Attributes:
-        root (BTreeNode): The root node of the B-tree.
-
-    Methods:
-        insert(key): Inserts a key into the B-tree.
-        traverse(): Traverses and prints the B-tree.
-    """
-    def __init__(self, t):
-        self.t = t
-        self.root = BTreeNode(t, is_leaf=True)
-
-    def traverse(self, node, level=0):
-        """Traverses and prints the B-tree."""
-        if node:
-            print("Level", level, ":", node.keys)
-            if not node.is_leaf:
-                for child in node.children:
-                    self.traverse(child, level + 1)
+class BinaryTree:
+    def __init__(self):
+        self.root = None
 
     def insert(self, key):
-        """Inserts a key into the B-tree."""
-        root = self.root
-        if len(root.keys) == (2 * self.t - 1):
-            s = BTreeNode(self.t, is_leaf=False)
-            self.root = s
-            s.children.append(root)
-            self.split_child(s, 0)
-            self.insert_non_full(s, key)
+        if self.root is None:
+            self.root = Node(key)
         else:
-            self.insert_non_full(root, key)
+            self._insert_level_order(self.root, key)
 
-    def insert_non_full(self, node, key):
-        """Inserts a key into a node that is not full."""
-        i = len(node.keys) - 1
-        if node.is_leaf:
-            node.keys.append(None)
-            while i >= 0 and key < node.keys[i]:
-                node.keys[i + 1] = node.keys[i]
-                i -= 1
-            node.keys[i + 1] = key
-        else:
-            while i >= 0 and key < node.keys[i]:
-                i -= 1
-            i += 1
-            if len(node.children[i].keys) == (2 * self.t - 1):
-                self.split_child(node, i)
-                if key > node.keys[i]:
-                    i += 1
-            self.insert_non_full(node.children[i], key)
+    def _insert_level_order(self, root, key):
+        queue = [root]
+        while queue:
+            temp = queue.pop(0)
+            if temp.left is None:
+                temp.left = Node(key)
+                return
+            else:
+                queue.append(temp.left)
+            if temp.right is None:
+                temp.right = Node(key)
+                return
+            else:
+                queue.append(temp.right)
 
-    def split_child(self, parent, i):
-        """Splits the child of a node."""
-        t = self.t
-        y = parent.children[i]
-        z = BTreeNode(t, is_leaf=y.is_leaf)
-        parent.children.insert(i + 1, z)
-        parent.keys.insert(i, y.keys[t - 1])
-        z.keys = y.keys[t:(2 * t - 1)]
-        y.keys = y.keys[0:(t - 1)]
-        if not y.is_leaf:
-            z.children = y.children[t:(2 * t)]
-            y.children = y.children[0:t]
+    def search(self, key):
+        return self._search_level_order(self.root, key)
+
+    def _search_level_order(self, root, key):
+        if root is None:
+            return None
+        queue = [root]
+        while queue:
+            temp = queue.pop(0)
+            if temp.key == key:
+                return temp
+            if temp.left:
+                queue.append(temp.left)
+            if temp.right:
+                queue.append(temp.right)
+        return None
+
+    def inorder_traversal(self):
+        self._inorder_recursive(self.root)
+        print()
+
+    def _inorder_recursive(self, root):
+        if root:
+            self._inorder_recursive(root.left)
+            print(root.key, end=" ")
+            self._inorder_recursive(root.right)
+
+    def preorder_traversal(self):
+        self._preorder_recursive(self.root)
+        print()
+
+    def _preorder_recursive(self, root):
+        if root:
+            print(root.key, end=" ")
+            self._preorder_recursive(root.left)
+            self._preorder_recursive(root.right)
+
+    def postorder_traversal(self):
+        self._postorder_recursive(self.root)
+        print()
+
+    def _postorder_recursive(self, root):
+        if root:
+            self._postorder_recursive(root.left)
+            self._postorder_recursive(root.right)
+            print(root.key, end=" ")
 
 # Example usage
-if __name__ == "__main__":
-    btree = BTree(t=2)  # Create a B-tree with minimum degree 2
-    keys = [10, 20, 5, 6, 15, 30, 25, 40, 50, 35]
-    for key in keys:
-        btree.insert(key)
-    btree.traverse(btree.root)
+bt = BinaryTree()
+bt.insert(1)
+bt.insert(2)
+bt.insert(3)
+bt.insert(4)
+bt.insert(5)
+bt.insert(6)
+bt.insert(7)
+
+print("Inorder traversal:")
+bt.inorder_traversal()  # Output: 4 2 5 1 6 3 7
+
+print("Preorder traversal:")
+bt.preorder_traversal()  # Output: 1 2 4 5 3 6 7
+
+print("Postorder traversal:")
+bt.postorder_traversal()  # Output: 4 5 2 6 7 3 1
+
+print("Search for 4:", "Found" if bt.search(4) else "Not Found")
+print("Search for 10:", "Found" if bt.search(10) else "Not Found")
