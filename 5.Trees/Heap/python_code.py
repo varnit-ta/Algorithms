@@ -1,67 +1,50 @@
-class MaxHeap:
-    def __init__(self):
-        self.heap = []
+def heapify(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
 
-    def parent(self, i):
-        return (i - 1) // 2
+    if l < n and arr[i] < arr[l]:
+        largest = l
 
-    def left_child(self, i):
-        return 2 * i + 1
+    if r < n and arr[largest] < arr[r]:
+        largest = r
 
-    def right_child(self, i):
-        return 2 * i + 2
+    if largest != i:
+        arr[i],arr[largest] = arr[largest],arr[i]
+        heapify(arr, n, largest)
 
-    def swap(self, i, j):
-        self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
+def insert(array, newNum):
+    size = len(array)
+    if size == 0:
+        array.append(newNum)
+    else:
+        array.append(newNum);
+        for i in range((size//2)-1, -1, -1):
+            heapify(array, size, i)
 
-    def insert(self, key):
-        self.heap.append(key)
-        self._heapify_up(len(self.heap) - 1)
+def deleteNode(array, num):
+    size = len(array)
+    i = 0
+    for i in range(0, size):
+        if num == array[i]:
+            break
 
-    def _heapify_up(self, i):
-        parent = self.parent(i)
-        if i > 0 and self.heap[i] > self.heap[parent]:
-            self.swap(i, parent)
-            self._heapify_up(parent)
+    array[i], array[size-1] = array[size-1], array[i]
 
-    def extract_max(self):
-        if len(self.heap) == 0:
-            return None
-        if len(self.heap) == 1:
-            return self.heap.pop()
+    array.remove(num)
 
-        max_val = self.heap[0]
-        self.heap[0] = self.heap.pop()
-        self._heapify_down(0)
-        return max_val
+    for i in range((len(array)//2)-1, -1, -1):
+        heapify(array, len(array), i)
 
-    def _heapify_down(self, i):
-        max_index = i
-        left = self.left_child(i)
-        right = self.right_child(i)
+arr = []
 
-        if left < len(self.heap) and self.heap[left] > self.heap[max_index]:
-            max_index = left
-        if right < len(self.heap) and self.heap[right] > self.heap[max_index]:
-            max_index = right
+insert(arr, 3)
+insert(arr, 4)
+insert(arr, 9)
+insert(arr, 5)
+insert(arr, 2)
 
-        if i != max_index:
-            self.swap(i, max_index)
-            self._heapify_down(max_index)
+print ("Max-Heap array: " + str(arr))
 
-    def get_max(self):
-        if len(self.heap) > 0:
-            return self.heap[0]
-        return None
-
-# Example usage
-heap = MaxHeap()
-heap.insert(4)
-heap.insert(7)
-heap.insert(3)
-heap.insert(9)
-heap.insert(1)
-
-print("Max element:", heap.get_max())  # Output: 9
-print("Extracted max:", heap.extract_max())  # Output: 9
-print("New max element:", heap.get_max())  # Output: 7
+deleteNode(arr, 4)
+print("After deleting an element: " + str(arr))

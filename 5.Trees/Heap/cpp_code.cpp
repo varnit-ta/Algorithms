@@ -1,88 +1,91 @@
 #include <iostream>
 #include <vector>
 
-class MaxHeap {
-private:
-    std::vector<int> heap;
+using namespace std;
 
-    int parent(int i) { return (i - 1) / 2; }
-    int leftChild(int i) { return 2 * i + 1; }
-    int rightChild(int i) { return 2 * i + 2; }
+void swap(int *a, int *b)
+{
+    int temp = *b;
+    *b = *a;
+    *a = temp;
+}
 
-    void swap(int& a, int& b) {
-        int temp = a;
-        a = b;
-        b = temp;
+void heapify(vector<int> &hT, int i)
+{
+    int size = hT.size();
+    int largest = i;
+    int l = 2 * i + 1;
+    int r = 2 * i + 2;
+    if (l < size && hT[l] > hT[largest])
+        largest = l;
+    if (r < size && hT[r] > hT[largest])
+        largest = r;
+
+    if (largest != i)
+    {
+        swap(&hT[i], &hT[largest]);
+        heapify(hT, largest);
     }
+}
 
-    void heapifyUp(int i) {
-        int p = parent(i);
-        if (i > 0 && heap[i] > heap[p]) {
-            swap(heap[i], heap[p]);
-            heapifyUp(p);
+void insert(vector<int> &hT, int newNum)
+{
+    int size = hT.size();
+    if (size == 0)
+    {
+        hT.push_back(newNum);
+    }
+    else
+    {
+        hT.push_back(newNum);
+        for (int i = size / 2 - 1; i >= 0; i--)
+        {
+            heapify(hT, i);
         }
     }
+}
 
-    void heapifyDown(int i) {
-        int maxIndex = i;
-        int left = leftChild(i);
-        int right = rightChild(i);
-
-        if (left < heap.size() && heap[left] > heap[maxIndex]) {
-            maxIndex = left;
-        }
-        if (right < heap.size() && heap[right] > heap[maxIndex]) {
-            maxIndex = right;
-        }
-
-        if (i != maxIndex) {
-            swap(heap[i], heap[maxIndex]);
-            heapifyDown(maxIndex);
-        }
+void deleteNode(vector<int> &hT, int num)
+{
+    int size = hT.size();
+    int i;
+    for (i = 0; i < size; i++)
+    {
+        if (num == hT[i])
+            break;
     }
+    swap(&hT[i], &hT[size - 1]);
 
-public:
-    void insert(int key) {
-        heap.push_back(key);
-        heapifyUp(heap.size() - 1);
+    hT.pop_back();
+    for (int i = size / 2 - 1; i >= 0; i--)
+    {
+        heapify(hT, i);
     }
+}
 
-    int extractMax() {
-        if (heap.empty()) {
-            return -1;  // Or throw an exception
-        }
-        if (heap.size() == 1) {
-            int max = heap[0];
-            heap.pop_back();
-            return max;
-        }
+void printArray(vector<int> &hT)
+{
+    for (int i = 0; i < hT.size(); ++i)
+        cout << hT[i] << " ";
+    cout << "\n";
+}
 
-        int max = heap[0];
-        heap[0] = heap.back();
-        heap.pop_back();
-        heapifyDown(0);
-        return max;
-    }
+int main()
+{
+    vector<int> heapTree;
 
-    int getMax() {
-        if (!heap.empty()) {
-            return heap[0];
-        }
-        return -1;  // Or throw an exception
-    }
-};
+    insert(heapTree, 3);
+    insert(heapTree, 4);
+    insert(heapTree, 9);
+    insert(heapTree, 5);
+    insert(heapTree, 2);
 
-int main() {
-    MaxHeap heap;
-    heap.insert(4);
-    heap.insert(7);
-    heap.insert(3);
-    heap.insert(9);
-    heap.insert(1);
+    cout << "Max-Heap array: ";
+    printArray(heapTree);
 
-    std::cout << "Max element: " << heap.getMax() << std::endl;  // Output: 9
-    std::cout << "Extracted max: " << heap.extractMax() << std::endl;  // Output: 9
-    std::cout << "New max element: " << heap.getMax() << std::endl;  // Output: 7
+    deleteNode(heapTree, 4);
 
-    return 0;
+    cout << "After deleting an element: ";
+
+    printArray(heapTree);
 }

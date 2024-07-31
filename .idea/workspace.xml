@@ -9,7 +9,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec84ca3a-8830-49f2-bd9e-24b2840e939f" name="Changes" comment="" />
+    <list default="true" id="ec84ca3a-8830-49f2-bd9e-24b2840e939f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.Trees/Heap/Max-heap/cpp_code.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/5.Trees/Heap/cpp_code.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.Trees/Heap/Max-heap/python_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/5.Trees/Heap/python_code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.Trees/Heap/Min-heap/cpp_code.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.Trees/Heap/Min-heap/python_code.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +41,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "C/C++ File.cpp_code.cpp (1).executor": "Run",
     "C/C++ File.cpp_code.cpp.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -49,12 +57,23 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Work\Algorithms\5.Trees\Heap" />
+    </key>
+  </component>
+  <component name="RunManager" selected="C/C++ File.cpp_code.cpp (1)">
+    <configuration name="cpp_code.cpp (1)" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Algorithms" TARGET_NAME="cpp_code.cpp" CONFIG_NAME="cpp_code.cpp">
+      <option name="sourceFile" value="5.Trees\Heap\cpp_code.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="cpp_code.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Algorithms" TARGET_NAME="cpp_code.cpp" CONFIG_NAME="cpp_code.cpp">
       <option name="sourceFile" value="4.Linked List\Double LL\cpp_code.cpp" />
       <method v="2">
@@ -63,6 +82,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="C/C++ File.cpp_code.cpp (1)" />
         <item itemvalue="C/C++ File.cpp_code.cpp" />
       </list>
     </recent_temporary>
@@ -79,6 +99,7 @@
       <workItem from="1722408537084" duration="32000" />
       <workItem from="1722408581476" duration="538000" />
       <workItem from="1722409136363" duration="1738000" />
+      <workItem from="1722443240123" duration="1528000" />
     </task>
     <servers />
   </component>
