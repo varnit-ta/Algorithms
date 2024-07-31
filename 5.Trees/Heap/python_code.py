@@ -1,50 +1,89 @@
-def heapify(arr, n, i):
+array = [10 ,4, 2, 12, 134, 5, 33, 3]
+
+def heapify(arr, size, i):
     largest = i
-    l = 2 * i + 1
-    r = 2 * i + 2
+    left = 2*i + 1
+    right = 2*i + 2
 
-    if l < n and arr[i] < arr[l]:
-        largest = l
-
-    if r < n and arr[largest] < arr[r]:
-        largest = r
+    if left < size and arr[left] > arr[largest]:
+        largest = left
+    if right < size and arr[right] > arr[largest]:
+        largest = right
 
     if largest != i:
-        arr[i],arr[largest] = arr[largest],arr[i]
-        heapify(arr, n, largest)
+        arr[largest], arr[i] = arr[i], arr[largest]
+        heapify(arr, size, largest)
 
-def insert(array, newNum):
-    size = len(array)
-    if size == 0:
-        array.append(newNum)
-    else:
-        array.append(newNum);
-        for i in range((size//2)-1, -1, -1):
-            heapify(array, size, i)
+def build_heap(arr, size):
+    for i in range(size//2 - 1, -1, -1):
+        heapify(arr, size, i)
 
-def deleteNode(array, num):
-    size = len(array)
+def heap_sort(arr, size):
+    build_heap(arr, size)
+
+    print("")
+    print("="*20)
+    print("Original Heap : ", arr)
+
+    for i in range(size-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+
+    print("Sorted Heap : ", arr)
+    print("="*20)
+    print("")
+
+def insert(arr, size, num):
+    print("")
+    print("="*20)
+    print("Previous Heap : ", arr)
+
+    arr.append(num)
+    build_heap(arr, len(arr))
+
+    print("After Heap : ", arr)
+    print("="*20)
+    print("")
+
+def remove(arr, size, num):
+
+    print("")
+    print("="*20)
+    print("Previous Heap : ", arr)
+
     i = 0
-    for i in range(0, size):
-        if num == array[i]:
+    for i in range(size):
+        if num == arr[i]:
             break
 
-    array[i], array[size-1] = array[size-1], array[i]
+    arr[i], arr[size - 1] = arr[size - 1], arr[i]
+    arr.remove(num)
 
-    array.remove(num)
+    build_heap(arr, len(arr))
 
-    for i in range((len(array)//2)-1, -1, -1):
-        heapify(array, len(array), i)
+    print("After Heap : ", arr)
+    print("="*20)
+    print("")
 
-arr = []
+def main():
+    while 1:
+        print("1. Heap Sort")
+        print("2. Insert")
+        print("3. Delete")
+        print("4. Exit")
+        choice = int(input("Enter your choice : "))
 
-insert(arr, 3)
-insert(arr, 4)
-insert(arr, 9)
-insert(arr, 5)
-insert(arr, 2)
+        if choice == 1:
+            heap_sort(array[:], len(array))
+        elif choice == 2:
+            num = int(input("Enter value to insert in heap : "))
+            insert(array, len(array), num)
+        elif choice == 3:
+            num = int(input("Enter value to delete from heap : "))
+            remove(array, len(array), num)
+        elif choice == 4:
+            break
+        else:
+            print("Invalid Input")
 
-print ("Max-Heap array: " + str(arr))
-
-deleteNode(arr, 4)
-print("After deleting an element: " + str(arr))
+main()
