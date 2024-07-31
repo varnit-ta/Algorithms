@@ -1,3 +1,0 @@
-D:/Work/Algorithms/Practice/cmake-build-debug/CMakeFiles/Practice.dir
-D:/Work/Algorithms/Practice/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Work/Algorithms/Practice/cmake-build-debug/CMakeFiles/rebuild_cache.dir
