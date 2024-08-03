@@ -10,10 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec84ca3a-8830-49f2-bd9e-24b2840e939f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/5.Trees/Heap/cpp_code.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/5.Trees/Heap/cpp_code.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/5.Trees/Heap/python_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/5.Trees/Heap/python_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practice/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practice/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,19 +66,7 @@
       <recent name="D:\Work\Algorithms\5.Trees\Heap" />
     </key>
   </component>
-  <component name="RunManager" selected="C/C++ File.cpp_code.cpp (1)">
-    <configuration name="cpp_code.cpp (1)" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Algorithms" TARGET_NAME="cpp_code.cpp" CONFIG_NAME="cpp_code.cpp">
-      <option name="sourceFile" value="5.Trees\Heap\cpp_code.cpp" />
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="cpp_code.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Algorithms" TARGET_NAME="cpp_code.cpp" CONFIG_NAME="cpp_code.cpp">
-      <option name="sourceFile" value="4.Linked List\Double LL\cpp_code.cpp" />
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -88,6 +75,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Practice" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -102,12 +90,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="C/C++ File.cpp_code.cpp (1)" />
-        <item itemvalue="C/C++ File.cpp_code.cpp" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
