@@ -1,106 +1,85 @@
-#include <iostream>
-#include <list>
-#include <stack>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-class Graph {
-  int V;
-  list<int> *adj;
-  void fillOrder(int s, bool visitedV[], stack<int> &Stack);
-  void DFS(int s, bool visitedV[]);
+void dfs(int node, vector<int> &vis, vector<int> adj[],
+		 stack<int> &st)
+{
+	vis[node] = 1;
+	for (auto it : adj[node])
+	{
+		if (!vis[it])
+		{
+			dfs(it, vis, adj, st);
+		}
+	}
 
-   public:
-  Graph(int V);
-  void addEdge(int s, int d);
-  void printSCC();
-  Graph transpose();
-};
-
-Graph::Graph(int V) {
-  this->V = V;
-  adj = new list<int>[V];
+	st.push(node);
 }
 
-// DFS
-void Graph::DFS(int s, bool visitedV[]) {
-  visitedV[s] = true;
-  cout << s << " ";
-
-  list<int>::iterator i;
-  for (i = adj[s].begin(); i != adj[s].end(); ++i)
-    if (!visitedV[*i])
-      DFS(*i, visitedV);
+void dfs3(int node, vector<int> &vis, vector<int> adjT[])
+{
+	vis[node] = 1;
+	for (auto it : adjT[node])
+	{
+		if (!vis[it])
+		{
+			dfs3(it, vis, adjT);
+		}
+	}
 }
 
-// Transpose
-Graph Graph::transpose() {
-  Graph g(V);
-  for (int s = 0; s < V; s++) {
-    list<int>::iterator i;
-    for (i = adj[s].begin(); i != adj[s].end(); ++i) {
-      g.adj[*i].push_back(s);
-    }
-  }
-  return g;
+int kosaraju(int V, vector<int> adj[])
+{
+	vector<int> vis(V, 0);
+	stack<int> st;
+	for (int i = 0; i < V; i++)
+	{
+		if (!vis[i])
+		{
+			dfs(i, vis, adj, st);
+		}
+	}
+
+	vector<int> adjT[V];
+	for (int i = 0; i < V; i++)
+	{
+		vis[i] = 0;
+		for (auto it : adj[i])
+		{
+			adjT[it].push_back(i);
+		}
+	}
+	int scc = 0;
+	while (!st.empty())
+	{
+		int node = st.top();
+		st.pop();
+		if (!vis[node])
+		{
+			scc++;
+			dfs3(node, vis, adjT);
+		}
+	}
+	return scc;
 }
 
-// Add edge into the graph
-void Graph::addEdge(int s, int d) {
-  adj[s].push_back(d);
-}
+int main()
+{
 
-void Graph::fillOrder(int s, bool visitedV[], stack<int> &Stack) {
-  visitedV[s] = true;
+	int n = 5;
+	int edges[5][2] = {
+		{1, 0}, {0, 2}, {2, 1}, {0, 3}, {3, 4}
+	};
 
-  list<int>::iterator i;
-  for (i = adj[s].begin(); i != adj[s].end(); ++i)
-    if (!visitedV[*i])
-      fillOrder(*i, visitedV, Stack);
+	vector<int> adj[n];
 
-  Stack.push(s);
-}
+	for (int i = 0; i < n; i++)
+	{
+		adj[edges[i][0]].push_back(edges[i][1]);
+	}
 
-// Print strongly connected component
-void Graph::printSCC() {
-  stack<int> Stack;
-
-  bool *visitedV = new bool[V];
-  for (int i = 0; i < V; i++)
-    visitedV[i] = false;
-
-  for (int i = 0; i < V; i++)
-    if (visitedV[i] == false)
-      fillOrder(i, visitedV, Stack);
-
-  Graph gr = transpose();
-
-  for (int i = 0; i < V; i++)
-    visitedV[i] = false;
-
-  while (Stack.empty() == false) {
-    int s = Stack.top();
-    Stack.pop();
-
-    if (visitedV[s] == false) {
-      gr.DFS(s, visitedV);
-      cout << endl;
-    }
-  }
-}
-
-int main() {
-  Graph g(8);
-  g.addEdge(0, 1);
-  g.addEdge(1, 2);
-  g.addEdge(2, 3);
-  g.addEdge(2, 4);
-  g.addEdge(3, 0);
-  g.addEdge(4, 5);
-  g.addEdge(5, 6);
-  g.addEdge(6, 4);
-  g.addEdge(6, 7);
-
-  cout << "Strongly Connected Components:\n";
-  g.printSCC();
+	int ans = kosaraju(n, adj);
+	cout << "The number of strongly connected components is: " << ans << endl;
+	return 0;
 }

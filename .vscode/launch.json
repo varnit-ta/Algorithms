@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/Work/Algorithms/5.Trees/Heap",
-      "program": "d:/Work/Algorithms/5.Trees/Heap/build/Debug/outDebug",
+      "cwd": "d:/Work/Algorithms/Practice",
+      "program": "d:/Work/Algorithms/Practice/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
